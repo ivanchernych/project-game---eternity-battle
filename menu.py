@@ -1,10 +1,12 @@
 import pygame
 import pygame_menu
+from game import Game
 
 
 class Menu:
-    def __init__(self, sc):
+    def __init__(self, sc, size):
         self.sc = sc
+        self.size = size
 
     def crete_theme_menu(self):
         mytheme = pygame_menu.Theme(background_color=(0, 0, 0, 0),  # прозрачный фон
@@ -15,10 +17,12 @@ class Menu:
 
     def start_menu(self):
         menu = pygame_menu.Menu(
-            height=300,
-            width=400,
+            height=self.size[1],
+            width=self.size[0],
             theme=pygame_menu.themes.THEME_BLUE,
             title='Welcome!'
         )
+        menu.add.button('Играть', Game)
+        menu.add.button('Выход', Game)
         menu.mainloop(self.sc)
 
