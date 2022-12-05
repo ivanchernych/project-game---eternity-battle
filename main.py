@@ -1,21 +1,17 @@
 import pygame
+import pygame_menu
+from menu import Menu
 
-pygame.init()
-FPS = 60
-size = (860, 1080)
-clock = pygame.time.Clock()
-
-pygame.display.set_caption("eternity battle")
-sc = pygame.display.set_mode(size)
-sc.fill((255, 255, 255))
-
-pygame.display.update()
-while True:
+run = True
+while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            exit()
+            run = False
+    pygame.display.flip()
+pygame.quit()
 
-    sc.fill((255, 255, 255))
-    pygame.display.update()
-    clock.tick(FPS)
-
+if __name__ == '__main__':
+    pygame.init()
+    size = width, height, = 800, 400
+    screen = pygame.display.set_mode(size)
+    Menu(screen)
