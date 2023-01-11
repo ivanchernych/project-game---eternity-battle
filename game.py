@@ -29,17 +29,24 @@ class Game:
         return image
 
     def start_game(self):
+            FPS = 60
+            tick = 0
+            clock = pygame.time.Clock()
             all_sprites = pygame.sprite.Group()
             player_group = pygame.sprite.Group()
             image = self.load_image("1.png", -1)
-            User(image, 200, 200, player_group, all_sprites)
+            User(image, 500, 500, player_group, all_sprites)
             run = True
             while run:
                 for event in pygame.event.get():  # error is here
                     if event.type == pygame.QUIT:
+                        self.exit_game(event)
                         run = False
-                bg_color = (230, 230, 230)
-                self.screen.fill(bg_color)
+                    all_sprites.update(event)
+                self.screen.fill((255, 255, 255))
+                all_sprites.draw(self.screen)
+                tick += 1
+                clock.tick(FPS)
                 pygame.display.flip()
             pygame.quit()
 
