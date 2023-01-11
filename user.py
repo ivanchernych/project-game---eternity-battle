@@ -1,26 +1,25 @@
 import pygame
 
 
-class User:
-    def __init__(self, xCord, yCord, sc):
+class User(pygame.sprite.Sprite):
+    def __init__(self, image, xCord, yCord, *group):
+        super().__init__(*group)
+        self.image = image
         self.xCord = xCord
         self.yCord = yCord
-        self.sc = sc
+        self.rect = self.image.get_rect()
+        self.speed = 3
         self.jumpCount = 10  # высота прыжка
         self.isJump = False
         self.hp = 100
 
-    def character_creation(self):
-        pygame.draw.rect(self.sc, (255, 0, 0), (self.xCord, self.yCord, 40, 80))
-
-    def user1(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
-            self.xCord -= 3
-        if keys[pygame.K_d]:
-            self.xCord += 3
+    def controle(self, event):
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
+            self.xCord -= self.speed
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
+            self.xCord += self.speed
         if not(self.isJump):
-            if keys[pygame.K_SPACE]:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self.isJump = True
         else:
             if self.jumpCount >= -10:
@@ -29,3 +28,7 @@ class User:
             else:
                 self.jumpCount = 10
                 self.isJump = False
+
+    def update(self, *args):
+        if args:
+            self.controle(args[0])
