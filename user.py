@@ -29,20 +29,3 @@ class User:
             else:
                 self.jumpCount = 10
                 self.isJump = False
-
-    def user2(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
-            self.xCord -= 3
-        if keys[pygame.K_d]:
-            self.xCord += 3
-        if not(self.isJump):
-            if keys[pygame.K_SPACE]:
-                self.isJump = True
-        else:
-            if self.jumpCount >= -10:
-                self.yCord -= (self.jumpCount * abs(self.jumpCount)) * 0.5
-                self.jumpCount -= 1
-            else:
-                self.jumpCount = 10
-                self.isJump = False
