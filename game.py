@@ -5,7 +5,7 @@ from menu import Menu
 from player import Player
 
 
-def load_image(self, name, colorkey=None):
+def load_image(name, colorkey=None):
     fullname = os.path.join('date', name)
     # если файл не существует, то выходим
     if not os.path.isfile(fullname):
@@ -30,26 +30,40 @@ class Game:
         self.open_menu('main')
 
     def create_charackter(self):
-        pass
+        player1_image_left = load_image('player1_image_left.png', -1)
+        player1_image_right = load_image('player1_image_right.png', -1)
+        player_1_controle = {
+            'left': pygame.K_a,
+            'right': pygame.K_d,
+            'jump': pygame.K_w,
+            'attack': None
+
+        }
+        Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500, self.player1_group, self.all_sprites)
+
+        player2_image_left = load_image('player2_image_left.png', -1)
+        player2_image_right = load_image('player2_image_right.png', -1)
+        player_2_controle = {
+            'left': pygame.K_LEFT,
+            'right': pygame.K_RIGHT,
+            'jump': pygame.K_UP,
+            'attack': None
+
+        }
+        Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500, self.player2_group,
+               self.all_sprites)
 
     def start_game(self):
             FPS = 60
             tick = 0
             clock = pygame.time.Clock()
-            all_sprites = pygame.sprite.Group()
-            player_group = pygame.sprite.Group()
-            image = load_image("1.png", -1)
-            player_1_controle = {
-                'left': pygame.K_a,
-                'right': pygame.K_d,
-                'jump': pygame.K_SPACE,
-                'attack': None
-
-            }
-            Player(player_1_controle, 500, 500, self.player_group, self.all_sprites)
+            self.all_sprites = pygame.sprite.Group()
+            self.player1_group = pygame.sprite.Group()
+            self.player2_group = pygame.sprite.Group()
+            self.create_charackter()
             run = True
             while run:
-                for event in pygame.event.get():  # error is here
+                for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.exit_game(event)
                         run = False
