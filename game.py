@@ -4,7 +4,6 @@ import pygame
 from menu import Menu
 from player import Player
 
-
 def load_image(name, colorkey=None):
     fullname = os.path.join('date', name)
     # если файл не существует, то выходим
@@ -36,10 +35,10 @@ class Game:
             'left': pygame.K_a,
             'right': pygame.K_d,
             'jump': pygame.K_w,
-            'attack': None
+            'attack': pygame.K_LSHIFT
 
         }
-        Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500, self.player1_group, self.all_sprites)
+        Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500, self.player1_group, self.bullet, self.all_sprites)
 
         player2_image_left = load_image('player2_image_left.png', -1)
         player2_image_right = load_image('player2_image_right.png', -1)
@@ -47,16 +46,16 @@ class Game:
             'left': pygame.K_LEFT,
             'right': pygame.K_RIGHT,
             'jump': pygame.K_UP,
-            'attack': None
+            'attack': pygame.K_RSHIFT
 
         }
-        Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500, self.player2_group,
-               self.all_sprites)
+        Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500, self.player2_group, self.bullet,self.all_sprites)
 
     def start_game(self):
             FPS = 60
             tick = 0
             clock = pygame.time.Clock()
+            self.bullet = pygame.sprite.Group()
             self.all_sprites = pygame.sprite.Group()
             self.player1_group = pygame.sprite.Group()
             self.player2_group = pygame.sprite.Group()
