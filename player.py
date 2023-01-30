@@ -47,10 +47,11 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.jumpCount = 10
                 self.isJump = False
-        if keys[self.controles['attack']]:
-            bullet = Bullet(self.rect.x, self.rect.y, self.side, self.rect)
-            self.all_sprite_group.add(bullet)
-            self.bullet_group.add(bullet)
+
+    def shoot(self):
+        bullet = Bullet(self.rect.x, self.rect.y, self.side, self.rect)
+        self.all_sprite_group.add(bullet)
+        self.bullet_group.add(bullet)
 
     def update(self, *args):
             self.controle()

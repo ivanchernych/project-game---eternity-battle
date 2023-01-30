@@ -39,7 +39,7 @@ class Game:
             'attack': pygame.K_LSHIFT
 
         }
-        Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500, self.player1_group, self.bullet, self.all_sprites)
+        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500, self.player1_group, self.bullet, self.all_sprites)
 
         player2_image_left = load_image('player2_image_left.png', -1)
         player2_image_right = load_image('player2_image_right.png', -1)
@@ -50,7 +50,7 @@ class Game:
             'attack': pygame.K_RSHIFT
 
         }
-        Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500, self.player2_group, self.bullet,self.all_sprites)
+        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500, self.player2_group, self.bullet,self.all_sprites)
 
     def start_game(self):
             FPS = 60
@@ -67,6 +67,11 @@ class Game:
                     if event.type == pygame.QUIT:
                         self.exit_game(event)
                         run = False
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_LSHIFT:
+                            self.player1.shoot()
+                        if event.key == pygame.K_RSHIFT:
+                            self.player2.shoot()
                 self.all_sprites.update()
                 self.screen.fill((128, 166, 255))
                 self.all_sprites.draw(self.screen)
