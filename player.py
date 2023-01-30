@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
             self.side = 'left'
         self.rect.x = xCord
         self.rect.y = yCord
-        self.speed = 3
+        self.speed = 4
         self.jumpCount = 10  # высота прыжка
         self.isJump = False
         self.hp = 100
@@ -48,9 +48,10 @@ class Player(pygame.sprite.Sprite):
                 self.jumpCount = 10
                 self.isJump = False
         if keys[self.controles['attack']]:
-            bullet = Bullet(self.rect.x, self.rect.y, self.side)
+            bullet = Bullet(self.rect.x, self.rect.y, self.side, self.rect)
             self.all_sprite_group.add(bullet)
             self.bullet_group.add(bullet)
 
     def update(self, *args):
             self.controle()
+

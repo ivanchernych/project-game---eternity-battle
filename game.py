@@ -4,6 +4,7 @@ import pygame
 from menu import Menu
 from player import Player
 
+
 def load_image(name, colorkey=None):
     fullname = os.path.join('date', name)
     # если файл не существует, то выходим
@@ -67,7 +68,7 @@ class Game:
                         self.exit_game(event)
                         run = False
                 self.all_sprites.update()
-                self.screen.fill((255, 255, 255))
+                self.screen.fill((128, 166, 255))
                 self.all_sprites.draw(self.screen)
                 tick += 1
                 clock.tick(FPS)
