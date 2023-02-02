@@ -31,8 +31,8 @@ class Game:
         self.open_menu('main')
 
     def create_charackter(self):
-        player1_image_left = load_image('player1_image_left_photo-resizer.ru.png', -1)
-        player1_image_right = load_image('player1_image_right_photo-resizer.ru.png', -1)
+        player1_image_left = load_image('1.1.png', -1)
+        player1_image_right = load_image('1.2.png', -1)
         player_1_controle = {
             'left': pygame.K_a,
             'right': pygame.K_d,
@@ -41,10 +41,10 @@ class Game:
 
         }
         self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500,
-                              self.platform, self.player1_group, self.bullet, self.all_sprites)
+                              self.item_group, self.player1_group, self.bullet, self.all_sprites, self.player2_group)
 
-        player2_image_left = load_image('player2_image_left_photo-resizer.ru.png', -1)
-        player2_image_right = load_image('player2_image_right_photo-resizer.ru.png', -1)
+        player2_image_left = load_image('2.2.png', -1)
+        player2_image_right = load_image('2.1.png', -1)
         player_2_controle = {
             'left': pygame.K_LEFT,
             'right': pygame.K_RIGHT,
@@ -53,7 +53,7 @@ class Game:
 
         }
         self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500,
-                              self.platform, self.player2_group, self.bullet, self.all_sprites)
+                              self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group,)
 
     def start_game(self):
         # ФПС
@@ -62,14 +62,14 @@ class Game:
         clock = pygame.time.Clock()
 
         # Группы
-        self.platform = pygame.sprite.Group()
+        self.item_group = pygame.sprite.Group()
         self.bullet = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.Group()
         self.player1_group = pygame.sprite.Group()
         self.player2_group = pygame.sprite.Group()
 
         # Генерация карты
-        Map(1, self.platform, self.all_sprites).draw()
+        Map(1, self.item_group, self.all_sprites).draw()
 
         # Создание персонажей
         self.create_charackter()
@@ -94,6 +94,9 @@ class Game:
             # Отрисовка
             self.screen.fill((128, 166, 255))
             self.all_sprites.draw(self.screen)
+
+
+
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
