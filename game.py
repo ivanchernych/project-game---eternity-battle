@@ -31,8 +31,8 @@ class Game:
         self.open_menu('main')
 
     def create_charackter(self):
-        player1_image_left = load_image('1.1.png', -1)
-        player1_image_right = load_image('1.2.png', -1)
+        player1_image_left = load_image('1.1_photo-resizer.ru.png', -1)
+        player1_image_right = load_image('1.2_photo-resizer.ru.png', -1)
         player_1_controle = {
             'left': pygame.K_a,
             'right': pygame.K_d,
@@ -40,11 +40,11 @@ class Game:
             'attack': pygame.K_LSHIFT
 
         }
-        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 500, 500,
+        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 50, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
                               self.item_group, self.player1_group, self.bullet, self.all_sprites, self.player2_group)
 
-        player2_image_left = load_image('2.2.png', -1)
-        player2_image_right = load_image('2.1.png', -1)
+        player2_image_left = load_image('2.2_photo-resizer.ru.png', -1)
+        player2_image_right = load_image('2.1_photo-resizer.ru.png', -1)
         player_2_controle = {
             'left': pygame.K_LEFT,
             'right': pygame.K_RIGHT,
@@ -52,8 +52,8 @@ class Game:
             'attack': pygame.K_RSHIFT
 
         }
-        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1000, 500,
-                              self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group,)
+        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1575, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
+                              self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group)
 
     def start_game(self):
         # ФПС
@@ -67,13 +67,17 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.player1_group = pygame.sprite.Group()
         self.player2_group = pygame.sprite.Group()
+        self.player1_point = []
+        self.player2_point = []
+        self.heart_player1 = []
+        self.heart_player2 = []
 
         # Генерация карты
         Map(1, self.item_group, self.all_sprites).draw()
 
         # Создание персонажей
         self.create_charackter()
-
+        self.player1.draw_heart()
         run = True
         while run:
             for event in pygame.event.get():
@@ -87,23 +91,31 @@ class Game:
                         self.player2.shoot()
             # Обновление
             self.all_sprites.update()
-
             tick += 1
             clock.tick(FPS)
+            f1 = pygame.font.Font('Molot.otf', 100)
+            vs = f1.render('VS', True,
+                              (255, 255, 255))
+            pl1 = f1.render(str(len(self.player1_point)), True,
+                              (255, 255, 255))
+            pl2 = f1.render(str(len(self.player2_point)), True,
+                              (255, 255, 255))
 
             # Отрисовка
-            self.screen.fill((128, 166, 255))
+            self.screen.fill((38, 219, 255))
             self.all_sprites.draw(self.screen)
-
-
-
+            self.screen.blit(vs, (790, 740))
+            self.screen.blit(pl1, (550, 740))
+            self.screen.blit(pl2, (1050, 740))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
+
         pygame.quit()
 
     def open_menu(self, type_menu):
-        Menu(type_menu).start_menu(self.size_screen, self.screen, self.start_game)
+        m = Menu(type_menu)
+        m.start_menu(self.size_screen, self.screen, self.start_game)
 
     def exit_game(self, event):
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):

@@ -27,8 +27,8 @@ class Menu:
             title=''
         )
         menu.add.button('Играть', start_game)
-        menu.add.selector('карта: ', [('map1', 1), ('map2', 2)], style=pygame_menu.widgets.SELECTOR_STYLE_FANCY)
-        menu.add.selector('кол-во раундов: ', [('5', 1), ('10', 2), ('20', 3)],
+        self.map = menu.add.selector('карта: ', [('map1', 1), ('map2', 2)], style=pygame_menu.widgets.SELECTOR_STYLE_FANCY)
+        self.rounds = menu.add.selector('кол-во раундов: ', [('5', 1), ('10', 2), ('20', 3)],
                           style=pygame_menu.widgets.SELECTOR_STYLE_FANCY)
         menu.add.button('Выход', pygame_menu.events.EXIT)
         menu.mainloop(screen)
@@ -38,6 +38,7 @@ class Menu:
             self.open_main_menu(screen_size, screen, start_game)
         elif self.type_menu == "win player 1":
             pass
+
 
 
 
