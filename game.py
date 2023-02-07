@@ -55,7 +55,10 @@ class Game:
         self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1575, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
                               self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group)
 
-    def start_game(self):
+    def start_game(self, map, round):
+        self.name_map = int(map.get_value()[0][0])
+        self.round = int(round.get_value()[0][0])
+        print(self.round, self.name_map)
         # ФПС
         FPS = 60
         tick = 0
@@ -73,7 +76,7 @@ class Game:
         self.heart_player2 = []
 
         # Генерация карты
-        Map(1, self.item_group, self.all_sprites).draw()
+        Map(self.name_map, self.item_group, self.all_sprites).draw()
 
         # Создание персонажей
         self.create_charackter()
@@ -93,6 +96,12 @@ class Game:
             self.all_sprites.update()
             tick += 1
             clock.tick(FPS)
+            if self.round == len(self.player1_point):
+                print('WIN')
+                Menu('win player 1').start_menu(self.size_screen, self.screen, self.start_game)
+            if self.round == len(self.player2_point):
+                Menu('win player 2').start_menu(self.size_screen, self.screen, self.start_game)
+
             f1 = pygame.font.Font('Molot.otf', 100)
             vs = f1.render('VS', True,
                               (255, 255, 255))
@@ -115,7 +124,7 @@ class Game:
 
     def open_menu(self, type_menu):
         m = Menu(type_menu)
-        m.start_menu(self.size_screen, self.screen, self.start_game)
+        m.start_menu(self.size_screen, self.screen,  self.start_game)
 
     def exit_game(self, event):
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
