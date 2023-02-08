@@ -10,7 +10,7 @@ class Menu:
 
     def create_theme_menu(self):
         myimage = pygame_menu.baseimage.BaseImage(
-            image_path='menu_image.png',
+            image_path='date/menu_image.png',
             drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
             drawing_offset=(0, 0)
         )
@@ -38,7 +38,7 @@ class Menu:
 
     def create_theme_menu_winer_player1(self):
         myimage = pygame_menu.baseimage.BaseImage(
-            image_path='winer_player_1.jpg',
+            image_path='date/winer_player_1.jpg',
             drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
             drawing_offset=(0, 0)
         )
@@ -62,7 +62,7 @@ class Menu:
 
     def create_theme_menu_winer_player2(self):
         myimage = pygame_menu.baseimage.BaseImage(
-            image_path='winer_player_2.jpg',
+            image_path='date/winer_player_2.jpg',
             drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
             drawing_offset=(0, 0)
         )
@@ -86,7 +86,7 @@ class Menu:
 
     def create_theme_menu_controle(self):
         myimage = pygame_menu.baseimage.BaseImage(
-            image_path='controle.jpg',
+            image_path='date/controle.jpg',
             drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY,
             drawing_offset=(0, 0)
         )

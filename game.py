@@ -107,7 +107,7 @@ class Game:
                 Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()
 
             # подсчет киллов
-            f1 = pygame.font.Font('Molot.otf', 100)
+            f1 = pygame.font.Font('date/Molot.otf', 100)
             vs = f1.render('VS', True,
                               (255, 255, 255))
             pl1 = f1.render(str(len(self.player1_point)), True,
