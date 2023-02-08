@@ -58,7 +58,7 @@ class Game:
     def start_game(self, map, round):
         self.name_map = int(map.get_value()[0][0])
         self.round = int(round.get_value()[0][0])
-        print(self.round, self.name_map)
+
         # ФПС
         FPS = 60
         tick = 0
@@ -70,6 +70,7 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.player1_group = pygame.sprite.Group()
         self.player2_group = pygame.sprite.Group()
+
         self.player1_point = []
         self.player2_point = []
         self.heart_player1 = []
@@ -81,6 +82,8 @@ class Game:
         # Создание персонажей
         self.create_charackter()
         self.player1.draw_heart()
+
+        # игровой цикл
         run = True
         while run:
             for event in pygame.event.get():
@@ -92,6 +95,7 @@ class Game:
                         self.player1.shoot()
                     if event.key == pygame.K_RSHIFT:
                         self.player2.shoot()
+
             # Обновление
             self.all_sprites.update()
             tick += 1
@@ -102,6 +106,7 @@ class Game:
             if self.round == len(self.player2_point):
                 Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()
 
+            # подсчет киллов
             f1 = pygame.font.Font('Molot.otf', 100)
             vs = f1.render('VS', True,
                               (255, 255, 255))
@@ -119,7 +124,6 @@ class Game:
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
-
         pygame.quit()
 
     def open_menu(self, type_menu):
