@@ -98,9 +98,9 @@ class Game:
             clock.tick(FPS)
             if self.round == len(self.player1_point):
                 print('WIN')
-                Menu('win player 1').start_menu(self.size_screen, self.screen, self.start_game)
+                Menu('win player 1', self.size_screen, self.screen, self.start_game).start_menu()
             if self.round == len(self.player2_point):
-                Menu('win player 2').start_menu(self.size_screen, self.screen, self.start_game)
+                Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()
 
             f1 = pygame.font.Font('Molot.otf', 100)
             vs = f1.render('VS', True,
@@ -123,8 +123,8 @@ class Game:
         pygame.quit()
 
     def open_menu(self, type_menu):
-        m = Menu(type_menu)
-        m.start_menu(self.size_screen, self.screen,  self.start_game)
+        m = Menu(type_menu, self.size_screen, self.screen,  self.start_game)
+        m.start_menu()
 
     def exit_game(self, event):
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
