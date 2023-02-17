@@ -31,7 +31,7 @@ class Menu:
         menu.add.button('Играть', lambda: self.start_game(self.map, self.round))
         menu.add.button('Управление', lambda: self.controle())
         self.map = menu.add.selector('карта: ', [('1', 1), ('2', 2)], style=pygame_menu.widgets.SELECTOR_STYLE_FANCY)
-        self.round = menu.add.selector('кол-во раундов: ', [('1', 1), ('10', 2), ('20', 3)],
+        self.round = menu.add.selector('кол-во раундов: ', [('5', 1), ('10', 2), ('20', 3)],
                           style=pygame_menu.widgets.SELECTOR_STYLE_FANCY)
         menu.add.button('Выход', pygame_menu.events.EXIT)
         menu.mainloop(self.screen)

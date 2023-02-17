@@ -30,12 +30,12 @@ class Item(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 50, 50)
             self.mask = pygame.mask.from_surface(self.image)
-        if type == 'st':
+        elif type == 'st':
             self.image = load_image('st.png', 1)
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 1700, 150)
             self.mask = pygame.mask.from_surface(self.image)
-        if type == 'h':
+        elif type == 'h':
             self.image = load_image('h.png', -1)
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 1700, 150)

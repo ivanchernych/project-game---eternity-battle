@@ -116,7 +116,7 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top = p.rect.bottom
                     self.y_speed = 0
 
-    def update(self, *args):
+    def update(self):
         self.controle()
         if len(self.heart_player2) == 0:
             self.player1_point.append('point')

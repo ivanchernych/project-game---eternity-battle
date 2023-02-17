@@ -76,6 +76,8 @@ class Game:
         self.heart_player1 = []
         self.heart_player2 = []
 
+        my_font = pygame.font.Font('date/Molot.otf', 100)
+
         # Генерация карты
         Map(self.name_map, self.item_group, self.all_sprites).draw()
 
@@ -107,12 +109,11 @@ class Game:
                 Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()
 
             # подсчет киллов
-            f1 = pygame.font.Font('date/Molot.otf', 100)
-            vs = f1.render('VS', True,
+            vs = my_font.render('VS', True,
                               (255, 255, 255))
-            pl1 = f1.render(str(len(self.player1_point)), True,
+            pl1 = my_font.render(str(len(self.player1_point)), True,
                               (255, 255, 255))
-            pl2 = f1.render(str(len(self.player2_point)), True,
+            pl2 = my_font.render(str(len(self.player2_point)), True,
                               (255, 255, 255))
 
             # Отрисовка

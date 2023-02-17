@@ -3,9 +3,9 @@ import sqlite3
 
 
 class Map:
-    def __init__(self, number_map, *group):
-        self.all_sprite_group = group[1]
-        self.item_group = group[0]
+    def __init__(self, number_map, item_group, all_sprite_group):
+        self.all_sprite_group = all_sprite_group
+        self.item_group = item_group
         self.number_map = number_map
 
     def statistic(self):
