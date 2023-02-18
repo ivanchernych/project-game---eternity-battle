@@ -98,6 +98,23 @@ class Game:
                     if event.key == pygame.K_RSHIFT:
                         self.player2.shoot()
 
+            if len(self.heart_player2) == 0:
+                self.player1_point.append('point')
+                for el in self.heart_player1:
+                    el.kill()
+                self.heart_player1.clear()
+                self.player1.draw_heart()
+                self.player1.respawn()
+                self.player2.respawn()
+            if len(self.heart_player1) == 0:
+                self.player2_point.append('point')
+                for el in self.heart_player2:
+                    el.kill()
+                self.heart_player2.clear()
+                self.player2.draw_heart()
+                self.player1.respawn()
+                self.player2.respawn()
+
             # Обновление
             self.all_sprites.update()
             tick += 1

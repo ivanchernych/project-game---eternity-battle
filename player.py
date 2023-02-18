@@ -118,19 +118,6 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.controle()
-        if len(self.heart_player2) == 0:
-            self.player1_point.append('point')
-            for el in self.heart_player1:
-                el.kill()
-            self.heart_player1.clear()
-            self.draw_heart()
-            self.respawn()
-        if len(self.heart_player1) == 0:
-            self.player2_point.append('point')
-            for el in self.heart_player2:
-                el.kill()
-            self.heart_player2.clear()
-            self.draw_heart()
-            self.respawn()
+
 
 
