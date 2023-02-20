@@ -25,18 +25,18 @@ class Item(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
-        if type == 'p1':
-            self.image = load_image('pltf.png', 1)
+        if type == 'platform':
+            self.image = load_image('platform.png', 1)
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 50, 50)
             self.mask = pygame.mask.from_surface(self.image)
-        elif type == 'st':
-            self.image = load_image('st.png', 1)
+        elif type == 'statistics':
+            self.image = load_image('statistics.png', 1)
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 1700, 150)
             self.mask = pygame.mask.from_surface(self.image)
-        elif type == 'h':
-            self.image = load_image('h.png', -1)
+        elif type == 'heart':
+            self.image = load_image('heart.png', -1)
             self.rect = self.image.get_rect()
             self.rect = pygame.Rect(self.x, self.y, 1700, 150)
             self.mask = pygame.mask.from_surface(self.image)

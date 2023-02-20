@@ -31,8 +31,9 @@ class Game:
         self.open_menu('main')
 
     def create_charackter(self):
-        player1_image_left = load_image('1.1_photo-resizer.ru.png', -1)
-        player1_image_right = load_image('1.2_photo-resizer.ru.png', -1)
+        player1_image_left = load_image('1.1_player.png', -1)
+        player1_image_right = load_image('1.2_player.png', -1)
+
         player_1_controle = {
             'left': pygame.K_a,
             'right': pygame.K_d,
@@ -40,11 +41,13 @@ class Game:
             'attack': pygame.K_LSHIFT
 
         }
-        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 50, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
+        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 50, 650,
+                              self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
                               self.item_group, self.player1_group, self.bullet, self.all_sprites, self.player2_group)
 
-        player2_image_left = load_image('2.2_photo-resizer.ru.png', -1)
-        player2_image_right = load_image('2.1_photo-resizer.ru.png', -1)
+        player2_image_left = load_image('2.2_player.png', -1)
+        player2_image_right = load_image('2.1_player.png', -1)
+
         player_2_controle = {
             'left': pygame.K_LEFT,
             'right': pygame.K_RIGHT,
@@ -52,7 +55,8 @@ class Game:
             'attack': pygame.K_RSHIFT
 
         }
-        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1575, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
+        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1575, 650,
+                              self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,
                               self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group)
 
     def start_game(self, map, round):
@@ -92,6 +96,8 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.exit_game(event)
                     run = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:  # ВЫХОД В МЕНЮ
+                    Menu('main', self.size_screen, self.screen, self.start_game).start_menu()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LSHIFT:
                         self.player1.shoot()
@@ -120,35 +126,30 @@ class Game:
             tick += 1
             clock.tick(FPS)
             if self.round == len(self.player1_point):
-                print('WIN')
                 Menu('win player 1', self.size_screen, self.screen, self.start_game).start_menu()
             if self.round == len(self.player2_point):
                 Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()
 
             # подсчет киллов
             vs = my_font.render('VS', True,
-                              (255, 255, 255))
-            pl1 = my_font.render(str(len(self.player1_point)), True,
-                              (255, 255, 255))
-            pl2 = my_font.render(str(len(self.player2_point)), True,
-                              (255, 255, 255))
+                                (255, 255, 255))
+            points_player1 = my_font.render(str(len(self.player1_point)), True,
+                                 (255, 255, 255))
+            points_player2 = my_font.render(str(len(self.player2_point)), True,
+                                 (255, 255, 255))
 
             # Отрисовка
             self.screen.fill((38, 219, 255))
             self.all_sprites.draw(self.screen)
+
             self.screen.blit(vs, (790, 740))
-            self.screen.blit(pl1, (550, 740))
-            self.screen.blit(pl2, (1050, 740))
+            self.screen.blit(points_player1, (550, 740))
+            self.screen.blit(points_player2, (1050, 740))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
         pygame.quit()
 
     def open_menu(self, type_menu):
-        m = Menu(type_menu, self.size_screen, self.screen,  self.start_game)
-        m.start_menu()
-
-    def exit_game(self, event):
-        if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-            pygame.quit()
-            sys.exit()
+        menu = Menu(type_menu, self.size_screen, self.screen, self.start_game)
+        menu.start_menu()

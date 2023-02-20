@@ -45,7 +45,8 @@ def create_particles(position, all_sprite_group):
 
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, x, y, side, name_shooting, name_in_whom, item_group, all_sprite_group, hp_heart_player1, hp_heart_player2):
+    def __init__(self, x, y, side, name_shooting, name_in_whom, item_group, all_sprite_group,
+                 hp_heart_player1, hp_heart_player2):
         pygame.sprite.Sprite.__init__(self)
         self.item_group = item_group
         self.image = pygame.Surface((15, 8))
@@ -89,4 +90,3 @@ class Bullet(pygame.sprite.Sprite):
         for i in self.item_group:
             if pygame.sprite.collide_rect(self, i):
                 self.kill()
-

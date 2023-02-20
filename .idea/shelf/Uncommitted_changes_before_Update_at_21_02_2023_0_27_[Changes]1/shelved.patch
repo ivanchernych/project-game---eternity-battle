@@ -1,0 +1,37 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import pygame\r\nfrom game import Game\r\n\r\nif __name__ == '__main__':\r\n    pygame.init()\r\n    size = width, height, = 1700, 850\r\n    Game(size, caption='Eternity battle')
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	
++++ b/main.py	
+@@ -1,7 +1,0 @@
+-import pygame
+-from game import Game
+-
+-if __name__ == '__main__':
+-    pygame.init()
+-    size = width, height, = 1700, 850
+-    Game(size, caption='Eternity battle')
+\ No newline at end of file
+Index: game.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import sys\r\nimport os\r\nimport pygame\r\nfrom menu import Menu\r\nfrom player import Player\r\nfrom map import Map\r\n\r\n\r\ndef load_image(name, colorkey=None):\r\n    fullname = os.path.join('date', name)\r\n    # если файл не существует, то выходим\r\n    if not os.path.isfile(fullname):\r\n        print(f\"Файл с изображением '{fullname}' не найден\")\r\n        sys.exit()\r\n    image = pygame.image.load(fullname)\r\n    if colorkey is not None:\r\n        image = image.convert()\r\n        if colorkey == -1:\r\n            colorkey = image.get_at((0, 0))\r\n        image.set_colorkey(colorkey)\r\n    else:\r\n        image = image.convert_alpha()\r\n    return image\r\n\r\n\r\nclass Game:\r\n    def __init__(self, size_screen, caption):\r\n        pygame.display.set_caption(caption)\r\n        self.screen = pygame.display.set_mode(size_screen)\r\n        self.size_screen = size_screen\r\n        self.open_menu('main')\r\n\r\n    def create_charackter(self):\r\n        player1_image_left = load_image('1.1_photo-resizer.ru.png', -1)\r\n        player1_image_right = load_image('1.2_photo-resizer.ru.png', -1)\r\n        player_1_controle = {\r\n            'left': pygame.K_a,\r\n            'right': pygame.K_d,\r\n            'jump': pygame.K_w,\r\n            'attack': pygame.K_LSHIFT\r\n\r\n        }\r\n        self.player1 = Player('player1', player_1_controle, player1_image_left, player1_image_right, 50, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,\r\n                              self.item_group, self.player1_group, self.bullet, self.all_sprites, self.player2_group)\r\n\r\n        player2_image_left = load_image('2.2_photo-resizer.ru.png', -1)\r\n        player2_image_right = load_image('2.1_photo-resizer.ru.png', -1)\r\n        player_2_controle = {\r\n            'left': pygame.K_LEFT,\r\n            'right': pygame.K_RIGHT,\r\n            'jump': pygame.K_UP,\r\n            'attack': pygame.K_RSHIFT\r\n\r\n        }\r\n        self.player2 = Player('player2', player_2_controle, player2_image_left, player2_image_right, 1575, 650, self.heart_player1, self.heart_player2, self.player1_point, self.player2_point,\r\n                              self.item_group, self.player2_group, self.bullet, self.all_sprites, self.player1_group)\r\n\r\n    def start_game(self, map, round):\r\n        self.name_map = int(map.get_value()[0][0])\r\n        self.round = int(round.get_value()[0][0])\r\n\r\n        # ФПС\r\n        FPS = 60\r\n        tick = 0\r\n        clock = pygame.time.Clock()\r\n\r\n        # Группы\r\n        self.item_group = pygame.sprite.Group()\r\n        self.bullet = pygame.sprite.Group()\r\n        self.all_sprites = pygame.sprite.Group()\r\n        self.player1_group = pygame.sprite.Group()\r\n        self.player2_group = pygame.sprite.Group()\r\n\r\n        self.player1_point = []\r\n        self.player2_point = []\r\n        self.heart_player1 = []\r\n        self.heart_player2 = []\r\n\r\n        my_font = pygame.font.Font('date/Molot.otf', 100)\r\n\r\n        # Генерация карты\r\n        Map(self.name_map, self.item_group, self.all_sprites).draw()\r\n\r\n        # Создание персонажей\r\n        self.create_charackter()\r\n        self.player1.draw_heart()\r\n\r\n        # игровой цикл\r\n        run = True\r\n        while run:\r\n            for event in pygame.event.get():\r\n                if event.type == pygame.QUIT:\r\n                    self.exit_game(event)\r\n                    run = False\r\n                elif event.type == pygame.KEYDOWN:\r\n                    if event.key == pygame.K_LSHIFT:\r\n                        self.player1.shoot()\r\n                    if event.key == pygame.K_RSHIFT:\r\n                        self.player2.shoot()\r\n\r\n            # Обновление\r\n            self.all_sprites.update()\r\n            tick += 1\r\n            clock.tick(FPS)\r\n            if self.round == len(self.player1_point):\r\n                print('WIN')\r\n                Menu('win player 1', self.size_screen, self.screen, self.start_game).start_menu()\r\n            if self.round == len(self.player2_point):\r\n                Menu('win player 2', self.size_screen, self.screen, self.start_game).start_menu()\r\n\r\n            # подсчет киллов\r\n            vs = my_font.render('VS', True,\r\n                              (255, 255, 255))\r\n            pl1 = my_font.render(str(len(self.player1_point)), True,\r\n                              (255, 255, 255))\r\n            pl2 = my_font.render(str(len(self.player2_point)), True,\r\n                              (255, 255, 255))\r\n\r\n            # Отрисовка\r\n            self.screen.fill((38, 219, 255))\r\n            self.all_sprites.draw(self.screen)\r\n            self.screen.blit(vs, (790, 740))\r\n            self.screen.blit(pl1, (550, 740))\r\n            self.screen.blit(pl2, (1050, 740))\r\n\r\n            # После отрисовки всего, переворачиваем экран\r\n            pygame.display.flip()\r\n        pygame.quit()\r\n\r\n    def open_menu(self, type_menu):\r\n        m = Menu(type_menu, self.size_screen, self.screen,  self.start_game)\r\n        m.start_menu()\r\n\r\n    def exit_game(self, event):\r\n        if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):\r\n            pygame.quit()\r\n            sys.exit()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/game.py b/game.py
+--- a/game.py	
++++ b/game.py	
+@@ -92,6 +92,7 @@
+                 if event.type == pygame.QUIT:
+                     self.exit_game(event)
+                     run = False
++
+                 elif event.type == pygame.KEYDOWN:
+                     if event.key == pygame.K_LSHIFT:
+                         self.player1.shoot()

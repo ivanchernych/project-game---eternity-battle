@@ -9,9 +9,9 @@ class Map:
         self.number_map = number_map
 
     def statistic(self):
-        st = Item(0, 750, 'st')
-        self.all_sprite_group.add(st)
-        self.item_group.add(st)
+        statistics = Item(0, 750, 'statistics')
+        self.all_sprite_group.add(statistics)
+        self.item_group.add(statistics)
 
     def map(self):
         con = sqlite3.connect('cards.db')
@@ -23,10 +23,10 @@ class Map:
             line = cur.execute("""SELECT * FROM cards
             WHERE name_map = ? AND row = ? """, (self.number_map, row)).fetchall()
             line = line[0][2:]
-            for c in range(34):
+            for block in range(34):
                 x += 50
-                if line[c] == 'x':
-                    pl = Item(x, y, 'p1')
+                if line[block] == 'x':
+                    pl = Item(x, y, 'platform')
                     self.all_sprite_group.add(pl)
                     self.item_group.add(pl)
         cur.close()
