@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee348cf0-65d9-4b6f-8225-487e71e38932" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/bullet.py" beforeDir="false" afterPath="$PROJECT_DIR$/bullet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/item.py" afterDir="false" />
+    <list default="true" id="ee348cf0-65d9-4b6f-8225-487e71e38932" name="Changes" comment="clear project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/1.1_photo-resizer.ru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/1.2_photo-resizer.ru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/2.1_photo-resizer.ru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/2.2_photo-resizer.ru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/p2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/plt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/pltf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/date/st.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -430,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676627357660</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="clear project">
+      <created>1676931168327</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1676931168327</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

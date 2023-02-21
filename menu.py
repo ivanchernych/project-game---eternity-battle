@@ -75,5 +75,3 @@ class Menu:
             self.winner_player1()
         elif self.type_menu == "win player 2":
             self.winner_player2()
-        elif self.type_menu == 'pause':
-            self.pause()
